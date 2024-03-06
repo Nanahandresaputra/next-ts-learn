@@ -19,7 +19,7 @@ export default function RootLayout({
       <Provider store={store}>
         <body className="bg-lime-50">
           <Header />
-          <div className="mt-[10vh]">
+          <div>
             {children} 
           </div>
         </body>
