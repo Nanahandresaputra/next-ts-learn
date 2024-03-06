@@ -1,16 +1,14 @@
+import { config } from "@/config/config";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-
 
 interface Datas {
   category: number;
-  difficulty:string;
+  difficulty: string;
 }
 
-export const quizApi = createAsyncThunk("post/get", (data:Datas) => {
-  
-  
+export const quizApi = createAsyncThunk("post/get", (data: Datas) => {
   return new Promise((resolve, reject): void => {
-    fetch(`https://opentdb.com/api.php?amount=10&category=${data.category}&difficulty=${data.difficulty}&type=multiple`, {
+    fetch(`${config.baseUrl}&category=${data.category}&difficulty=${data.difficulty}&type=multiple`, {
       method: "GET",
     } as any)
       .then((res) => {
@@ -23,13 +21,10 @@ export const quizApi = createAsyncThunk("post/get", (data:Datas) => {
   });
 });
 
-
-
 interface InitialState {
-  question: any;
+  question: [];
   isLoadingQuestion: boolean;
 }
-
 
 let initialState: InitialState = {
   question: [],
@@ -46,9 +41,9 @@ const postsSlice = createSlice({
     }),
       builder.addCase(quizApi.fulfilled, (state, action: PayloadAction<any>) => {
         state.isLoadingQuestion = false;
-        state.question = action.payload
-      })
-  }
+        state.question = action.payload;
+      });
+  },
 });
 
 export default postsSlice.reducer;
