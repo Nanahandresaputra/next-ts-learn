@@ -15,10 +15,10 @@ export const quizApi = createAsyncThunk("post/get", (data: Datas) => {
         return res.json();
       })
       .then((res) => {
-        return resolve(res.results);
+        resolve(res.results);
       })
       .catch((err) => {
-         return reject(err)
+        reject(err);
       });
   });
 });
@@ -29,6 +29,7 @@ interface InitialState {
   isErrorQuestion: boolean;
   correct: number;
   inCorrect: number;
+  currentPage: number;
 }
 
 let initialState: InitialState = {
@@ -36,7 +37,8 @@ let initialState: InitialState = {
   isLoadingQuestion: false,
   isErrorQuestion: false,
   correct: 0,
-  inCorrect: 0
+  inCorrect: 0,
+  currentPage: 0,
 };
 
 const postsSlice = createSlice({
@@ -44,14 +46,17 @@ const postsSlice = createSlice({
   initialState,
   reducers: {
     correctAnswer: (state, action: PayloadAction<any>) => {
-      return {...state, correct: action.payload}
+      return { ...state, correct: action.payload };
     },
-    inCorrectAnswer: (state, action: PayloadAction<any>) => { 
-      return {...state, inCorrect: action.payload}
+    inCorrectAnswer: (state, action: PayloadAction<any>) => {
+      return { ...state, inCorrect: action.payload };
     },
-    resetQuestion: (state) => { 
-      return { ...state, question: []}
-    }
+    resetQuestion: (state) => {
+      return { ...state, question: [] };
+    },
+    setCurrentPage: (state, action: PayloadAction<any>) => {
+      return { ...state, currentPage: action.payload };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(quizApi.pending, (state) => {
@@ -63,13 +68,13 @@ const postsSlice = createSlice({
         state.isErrorQuestion = false;
         state.question = action.payload;
       }),
-      builder.addCase(quizApi.rejected, (state) => { 
+      builder.addCase(quizApi.rejected, (state) => {
         state.isLoadingQuestion = false;
         state.isErrorQuestion = true;
       });
   },
 });
 
-export const {correctAnswer, inCorrectAnswer,resetQuestion } = postsSlice.actions;
+export const { correctAnswer, inCorrectAnswer, resetQuestion, setCurrentPage } = postsSlice.actions;
 
 export default postsSlice.reducer;
