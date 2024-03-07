@@ -3,7 +3,6 @@
 import Image from "next/image";
 import banner from "../../public/assets/banner.svg";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
-import { useEffect } from "react";
 import { quizApi } from "@/store/siderSlice";
 import { Button, ConfigProvider, Form, Select } from "antd";
 import selectCategory from "@/dummy/categorySelect";
@@ -18,7 +17,7 @@ export default function Home() {
 
   const onFinishData = (values: any) => {
     dispatch(quizApi({ category: values.category, difficulty: values.difficulty }))
-      .then((res) => router.push(`/question/1`))
+      .then(() => router.push(`/question/1`))
       .catch((err) => console.log(err));
   };
 
@@ -93,7 +92,6 @@ export default function Home() {
             </Form>
           </div>
         </div>
-        {/* <Button type='primary' className="bg-blue-500" onClick={() => dispatch(quizApi({ category: 21, difficulty: 'easy' })).catch(err => console.log(err))}>Pencet</Button> */}
       </section>
     </ConfigProvider>
   );
