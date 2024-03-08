@@ -99,7 +99,7 @@ export default function Question() {
           >
           <p>Leaving the page will clear the history and return to the main page</p>
         </Modal>
-        <div className="flex relative justify-center w-11/12 lg:w-10/12 mt-[14vh] h-[80vh] rounded-lg bg-green-900 ">
+        <div className="flex relative justify-center w-11/12 lg:w-10/12 mt-[14vh] h-[85vh] md:h-[80vh] rounded-lg bg-green-900 ">
           <div className="absolute -top-5 md:-top-7 h-[6vh] w-7/12 rounded-lg bg-orange-600 flex justify-center items-center border-2 border-black">
             <h1 className="text-xl md:text-3xl font-semibold text-white">Question {getIndex === 0 ? 10 : getIndex}</h1>
           </div>
