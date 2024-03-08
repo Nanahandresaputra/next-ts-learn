@@ -5,7 +5,6 @@ import result from "../../../public/assets/result.png";
 import { Button, ConfigProvider } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useRouter } from "next/navigation";
-import { correctAnswer, inCorrectAnswer, resetQuestion, setCurrentPage } from "@/store/siderSlice";
 import { useEffect } from "react";
 
 export default function Result() {
@@ -14,10 +13,6 @@ export default function Result() {
   const router = useRouter();
 
   const handleNewQuiz = () => {
-    dispatch(resetQuestion());
-    dispatch(correctAnswer(0));
-    dispatch(inCorrectAnswer(0));
-    dispatch(setCurrentPage(0));
     router.push("/");
   };
 
@@ -34,7 +29,7 @@ export default function Result() {
       }}
     >
       <section className="flex justify-center">
-        <div className="flex flex-col space-y-7 md:space-y-5 items-center w-10/12 md:w-11/12 lg:w-10/12 mt-[14vh] h-[80vh] rounded-lg bg-green-900 bg-opacity-50">
+        <div className="flex flex-col space-y-7 md:space-y-5 items-center w-11/12 lg:w-10/12 mt-[10vh] h-[85vh] rounded-lg bg-green-900 bg-opacity-50">
           <Image src={result} alt="result" className="h-[15vh] md:h-[23vh] mt-[5vh] object-contain" />
           <div className="grid grid-cols-2 gap-7">
             <p className="text-xl md:text-3xl font-semibold col-span-2">Quiz Completed Successfully</p>

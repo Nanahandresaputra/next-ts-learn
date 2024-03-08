@@ -3,13 +3,14 @@
 import Image from "next/image";
 import banner from "../../public/assets/banner.svg";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
-import { quizApi } from "@/store/siderSlice";
+import { correctAnswer, inCorrectAnswer, quizApi, resetQuestion, setCurrentPage } from "@/store/siderSlice";
 import { Button, ConfigProvider, Form, Select } from "antd";
 import selectCategory from "@/dummy/categorySelect";
 import difficultySelect from "@/dummy/difficultySelect";
 import { useRouter } from "next/navigation";
 import { LoadingPage } from "@/components/loading/loading";
 import { openNotification } from "@/helpers/notification";
+import { useEffect } from "react";
 
 export default function Home() {
   const { isLoadingQuestion, isErrorQuestion, question } = useAppSelector((state) => state.post);
@@ -23,11 +24,18 @@ export default function Home() {
         if (isErrorQuestion) {
           openNotification("Network Error", "Please Check Your Internet Connection", "top");
         } else {
-          router.push(`/question/1`);
+        router.push(`/question/1`);
         }
       })
       .catch(() => openNotification("Network Error", "Please Check Your Internet Connection", "top"));
   };
+
+  useEffect(() => {
+    dispatch(resetQuestion());
+    dispatch(correctAnswer(0));
+    dispatch(inCorrectAnswer(0));
+    dispatch(setCurrentPage(0));
+  }, [])
 
   return (
     <ConfigProvider
