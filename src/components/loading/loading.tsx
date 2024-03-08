@@ -9,7 +9,7 @@ interface IsLoading {
 export function LoadingPage({ isLoadingQuestion, children }: IsLoading) {
 
   return isLoadingQuestion ?  (
-      <section className="h-full">
+      <section className="h-screen overflow-hidden absolute">
             <div className="absolute h-full w-full flex  flex-col z-50 justify-center items-center bg-black bg-opacity-75">
               <Image src={loading} alt="loading" />
               <p className="text-2xl text-white">Loading...</p>
