@@ -24,7 +24,7 @@ export default function Home() {
         if (isErrorQuestion) {
           openNotification("Network Error", "Please Check Your Internet Connection", "top");
         } else {
-        router.push(`/question/1`);
+          router.push(`/question/1`);
         }
       })
       .catch(() => openNotification("Network Error", "Please Check Your Internet Connection", "top"));
@@ -35,7 +35,7 @@ export default function Home() {
     dispatch(correctAnswer(0));
     dispatch(inCorrectAnswer(0));
     dispatch(setCurrentPage(0));
-  }, [])
+  }, []);
 
   return (
     <ConfigProvider
@@ -63,10 +63,10 @@ export default function Home() {
     >
       <LoadingPage isLoadingQuestion={isLoadingQuestion}>
         <section className="flex justify-center">
-          <div className="grid md:grid-cols-2 lg:gap-x-5 md:gap-y-8 md:items-center lg:gap-y-0 w-10/12 md:w-11/12 lg:w-10/12 mt-[10vh] lg:mt-0 lg:h-screen">
+          <div className="grid md:grid-cols-2 lg:gap-x-5 md:gap-y-8 md:items-center lg:gap-y-0 w-10/12 md:w-11/12 lg:w-10/12 mt-[8vh] lg:mt-0 lg:h-screen">
             <Image src={banner} alt="banner-logo" className="w-10/12 hidden md:block" />
 
-            <div className="space-y-[3vh]">
+            <div className="space-y-[1vh] md:space-y-[3vh]">
               <h1 className="flex flex-wrap items-end font-bold text-xl md:text-2xl lg:text-3xl">
                 Hi <span className="animate-waving-hand">👋</span>, <span className="text-green-900 mx-4">Welcome</span> to FUN Quiz
               </h1>
@@ -74,7 +74,7 @@ export default function Home() {
 
               <p className="font-medium text-base md:text-xl text-justify">{`Play quizzes for fun and increase your knowledge, get the highest score and set your own record. let's play quizzes to learn in a fun way.`}</p>
 
-              <div className="space-y-5 md:hidden lg:block lg:col-span-1">
+              <div className="space-y-3 md:space-y-5 md:hidden lg:block lg:col-span-1">
                 <p className="font-medium text-base md:text-xl">Choose the category and level of difficulty according to your wishes.</p>
                 <Form layout="vertical" className="lg:grid lg:grid-cols-2 items-center lg:gap-x-7" initialValues={{ category: 9, difficulty: "easy" }} onFinish={onFinishData}>
                   <Form.Item className="w-full" label={<p className="font-medium text-base md:text-lg">Category</p>} name="category">
